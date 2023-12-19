@@ -1,6 +1,6 @@
 # FrapFit
 
-* **Developed for:** pierre
+* **Developed for:** Pierre
 * **Team:** De Thé
 * **Date:** December 2023
 * **Software:** Fiji
