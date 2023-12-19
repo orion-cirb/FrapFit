@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>org.scijava</groupId>
+        <artifactId>pom-scijava</artifactId>
+        <version>37.0.0</version>
+        <relativePath />
+    </parent>
+
+    <groupId>fr.cirb.orion</groupId>
+    <artifactId>FrapFit</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+    
+    <name>FrapFit</name>
+    <description>Analyze FRAP data</description>
+    <url>https://github.com/orion-cirb/FrapFit</url>
+    
+    <organization>
+        <name>orion-cirb</name>
+        <url>http://orion-cirb.fr/</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>gletort</id>
+            <name>Gaëlle Letort</name>
+            <email>gaelle.letort@college-de-france.fr</email>
+            <organization>CIRB, Collège de France</organization>
+            <roles>
+                    <role>developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>pmailly</id>
+            <name>Philippe Mailly</name>
+            <email>philippe.mailly@college-de-france.fr</email>
+            <organization>CIRB, Collège de France</organization>
+            <roles>
+                    <role>support</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>hmonnet</id>
+            <name>Héloïse Monnet</name>
+            <email>heloise.monnet@college-de-france.fr</email>
+            <organization>CIRB, Collège de France</organization>
+            <roles>
+                    <role>support</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <properties>
+        <imagej.app.directory>/opt/Fiji.app/</imagej.app.directory>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>scijava.public</id>
+            <url>https://maven.scijava.org/content/groups/public</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!-- ImageJ dependencies -->
+        <dependency>
+            <groupId>net.imagej</groupId>
+            <artifactId>imagej</artifactId>
+        </dependency>
+        <!-- Fiji dependencies -->
+        <dependency>
+            <groupId>sc.fiji</groupId>
+            <artifactId>fiji</artifactId>
+        </dependency>
+        <!-- Bioformats dependencies -->
+        <dependency>
+            <groupId>ome</groupId>
+            <artifactId>bioformats_package</artifactId>
+            <version>6.11.0</version>
+            <type>pom</type>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copytoplugins</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <copy todir="${imagej.app.directory}/plugins/CIRB" file="target/${project.build.finalName}.jar"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
