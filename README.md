@@ -17,4 +17,4 @@ FRAP analysis of PML foci
 
 ### Version history
 
-Version 1 released on December 19, 2023.
+Version 1 released on December 20, 2023.
