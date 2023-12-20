@@ -66,7 +66,7 @@ public class FrapFitNuc implements PlugIn {
       var1.addMessage("Read a single PML stack previously saved");
       var1.addMessage("If unchecked, open all files from a folder (.nd)");
       var1.addCheckbox("load_PML_stack", false);
-      var1.addHelp("https://github.com/orion-cirb/FrapFit");
+      var1.addHelp("https://github.com/orion-cirb/FrapFit/tree/version2");
       var1.showDialog();
       if (var1.wasCanceled()) {
          return false;
