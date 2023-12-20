@@ -7,16 +7,13 @@
 
 ### Images description
 
-3D+time images taken with a x25 objective on a spinning-disk microscope.
+3D+time images taken with a x25 objective on a confocal microscope.
 
 1 channel: PML foci
 
 ### Plugin description
 
 FRAP analysis of PML foci
-
-
-### Dependencies
 
 ### Version history
 
