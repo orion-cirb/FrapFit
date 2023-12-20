@@ -1,5 +1,3 @@
-package Frap;
-
 import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Dialog;

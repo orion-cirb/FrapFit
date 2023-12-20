@@ -1,5 +1,3 @@
-package Frap;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -40,7 +38,7 @@ public class FunctionFitting extends AbstractCurveFitter {
          WeightedObservedPoint var5 = new WeightedObservedPoint(1.0D, var1[var4], var2[var4]);
          var3.add(var5);
       }
-
+      
       double[] var6 = this.fit(var3);
       this.getProblem(var3);
       return var6;

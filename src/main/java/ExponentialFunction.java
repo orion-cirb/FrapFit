@@ -1,5 +1,3 @@
-package Frap;
-
 import org.apache.commons.math3.analysis.ParametricUnivariateFunction;
 
 class ExponentialFunction implements ParametricUnivariateFunction {

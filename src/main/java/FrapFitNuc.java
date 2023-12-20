@@ -1,5 +1,3 @@
-package Frap;
-
 import ij.IJ;
 import ij.ImagePlus;
 import ij.Menus;
@@ -21,20 +19,23 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import loci.plugins.BF;
 import loci.plugins.in.ImporterOptions;
+import org.apache.commons.lang.ArrayUtils;
 
 public class FrapFitNuc implements PlugIn {
    int mode;
    ImagePlus imp;
    int nslices;
+   int bleachStartSlice;
+   int bleachEndSlice;
    RoiManager rm;
    ResultsTable myrt;
    String dir;
    String resdir;
    String name;
    String pmlname;
-   String res;
    boolean align;
    boolean filaments;
    boolean savePML;
@@ -48,6 +49,8 @@ public class FrapFitNuc implements PlugIn {
       Font var2 = new Font("SansSerif", 1, 12);
       String[] var3 = new String[]{"Both", "SingleExponential (a-b.exp(-ct))", "DoubleExponential (a-b.exp(-ct)-d.exp(-et))"};
       var1.addChoice("Fit_function", var3, var3[1]);
+      var1.addNumericField("Bleach first frame", 26, 0);
+      var1.addNumericField("Bleach last frame", 33, 0);
       var1.addCheckbox("align_stack", true);
       var1.addCheckbox("filamentous_pmls", false);
       var1.addMessage("------------------------------------------------------------------------- ");
@@ -63,6 +66,7 @@ public class FrapFitNuc implements PlugIn {
       var1.addMessage("Read a single PML stack previously saved");
       var1.addMessage("If unchecked, open all files from a folder (.nd)");
       var1.addCheckbox("load_PML_stack", false);
+      var1.addHelp("https://github.com/orion-cirb/FrapFit");
       var1.showDialog();
       if (var1.wasCanceled()) {
          return false;
@@ -76,6 +80,8 @@ public class FrapFitNuc implements PlugIn {
             }
          }
 
+         this.bleachStartSlice = (int) var1.getNextNumber();
+         this.bleachEndSlice = (int) var1.getNextNumber();
          this.align = var1.getNextBoolean();
          this.filaments = var1.getNextBoolean();
          this.savePML = var1.getNextBoolean();
@@ -133,7 +139,14 @@ public class FrapFitNuc implements PlugIn {
          var6 = this.imp.getAllStatistics();
          var5[var7 - 1] = var6.mean;
       }
-
+      
+      // Delete time points and corresponding intensity measurements between bleachStartSlice and bleachEndSlice
+      var2 = ArrayUtils.addAll(Arrays.copyOfRange(var2, 0, this.bleachStartSlice-1), Arrays.copyOfRange(var2, this.bleachEndSlice, this.nslices));
+      var3 = ArrayUtils.addAll(Arrays.copyOfRange(var3, 0, this.bleachStartSlice-1), Arrays.copyOfRange(var3, this.bleachEndSlice, this.nslices));
+      var4 = ArrayUtils.addAll(Arrays.copyOfRange(var4, 0, this.bleachStartSlice-1), Arrays.copyOfRange(var4, this.bleachEndSlice, this.nslices));
+      var5 = ArrayUtils.addAll(Arrays.copyOfRange(var5, 0, this.bleachStartSlice-1), Arrays.copyOfRange(var5, this.bleachEndSlice, this.nslices));
+      this.nslices -= this.bleachEndSlice - this.bleachStartSlice + 1;
+      
       PlotGraph var20 = new PlotGraph((double)this.nslices * this.dt * 1.05D);
       var20.plotXY("Raw intensities", var2, var4, "nucleus");
       var20.addPoints(var2, var3, "background");
