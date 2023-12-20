@@ -7,7 +7,7 @@
 
 ### Images description
 
-3D+time images taken with a x25 objective on a spinning-disk microscope.
+2D+time images taken with a x25 objective on a confocal microscope.
 
 1 channel: PML foci
 
@@ -15,9 +15,8 @@
 
 FRAP analysis of PML foci
 
-
-### Dependencies
-
 ### Version history
 
-Version 1 released on December 19, 2023.
+Version 2 released on December 20, 2023.
+Modified *Normalize by nucleus* plugin: delete time points and corresponding intensity measurements between frames given bu the user in the dialog box.
+
