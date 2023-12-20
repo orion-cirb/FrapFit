@@ -17,6 +17,7 @@ FRAP analysis of PML foci
 
 ### Version history
 
-Version 2 released on December 20, 2023.
-Modified *Normalize by nucleus* plugin: delete time points and corresponding intensity measurements between frames given bu the user in the dialog box.
+Version 2 released on December 20, 2023:
+
+In *Normalize by nucleus* plugin, deletion of intensity measurements between time frames given by the user in the dialog box. These time frames correspond to bleaching time.
 
